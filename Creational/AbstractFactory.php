@@ -1,15 +1,10 @@
 <?php
 
-// http://metanit.com/sharp/patterns/2.2.php
-
-// Когда система не должна зависеть от способа создания и компоновки новых объектов
-
-// Когда создаваемые объекты должны использоваться вместе и являются взаимосвязанными
-
 abstract class Weapon
 {
     public abstract function hit();
 }
+
 class SwordWeapon extends Weapon
 {
     public function hit()
@@ -17,6 +12,7 @@ class SwordWeapon extends Weapon
         echo "Sword hit";
     }
 }
+
 class ArbaletWeapon extends Weapon
 {
     public function hit()
@@ -29,6 +25,7 @@ abstract class Movement
 {
     public abstract function move();
 }
+
 class FlyMovement extends Movement
 {
     public function move()
@@ -36,6 +33,7 @@ class FlyMovement extends Movement
         echo "Fly movement";
     }
 }
+
 class RunMovement extends Movement
 {
     public function move()
@@ -49,6 +47,7 @@ abstract class HeroFactory
     public abstract function createWeapon();
     public abstract function createMovement();
 }
+
 class ElfFactory extends HeroFactory
 {
     public function createWeapon()
@@ -61,6 +60,7 @@ class ElfFactory extends HeroFactory
         return new FlyMovement();
     }
 }
+
 class WarriorFactory extends HeroFactory
 {
     public function createWeapon()
