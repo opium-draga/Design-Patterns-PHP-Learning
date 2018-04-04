@@ -1,63 +1,102 @@
 <?php
 
 
-/**
- * Class Shop
- * Abstraction
- */
-abstract class Shop
+class Control
 {
-    abstract function addProduct();
+    protected $device;
 
-    public function sell()
+    public function __construct(Device $device)
     {
-        // some base action
+        $this->device = $device;
+    }
+
+    public function turnOnOff($on = true)
+    {
+        return $on ? $this->device->enable() : $this->device->disable();
+    }
+
+    public function volumeUp()
+    {
+        $this->device->setVolume($this->device->getVolume() + 10);
+    }
+
+    public function volumeDown()
+    {
+        $this->device->setVolume($this->device->getVolume() - 10);
     }
 }
 
-class MobileShop extends Shop
+class AdvancedControl extends Control
 {
-    /**
-     * @var ShopImp
-     */
-    private $imp;
-
-    public function __construct($imp)
+    public function mute()
     {
-        $this->imp = $imp;
-    }
-
-    function addProduct()
-    {
-        $this->imp->addProduct();
+        $this->device->setVolume(0);
     }
 }
 
-/**
- * Class ShopImp
- * Implementation
- * It is not important to have implementation abstract class
- */
-abstract class ShopImp
+abstract class Device
 {
-    abstract function addProduct();
+    abstract function enable();
+    abstract function disable();
+    abstract function setVolume($value);
+    abstract function getVolume();
 }
 
-class MobileShopImp extends ShopImp
+class TV extends Device
 {
-    function addProduct()
+    function enable()
     {
-        // add somehow customer product
-        $this->sendSms();
+        // TODO: Implement enable() method.
     }
 
-    private function sendSms()
+    function disable()
     {
-        // send sms to consumer
+        // TODO: Implement disable() method.
+    }
+
+    function setVolume($value)
+    {
+        // TODO: Implement setVolume() method.
+    }
+
+    function getVolume()
+    {
+        // TODO: Implement getVolume() method.
     }
 }
 
-$imp = new MobileShopImp();
-$shop = new MobileShop($imp);
-$shop->addProduct();
+class Radio extends Device
+{
+    function enable()
+    {
+        // TODO: Implement enable() method.
+    }
 
+    function disable()
+    {
+        // TODO: Implement disable() method.
+    }
+
+    function setVolume($value)
+    {
+        // TODO: Implement setVolume() method.
+    }
+
+    function getVolume()
+    {
+        // TODO: Implement getVolume() method.
+    }
+}
+
+$radioDevice = new Radio();
+$control = new Control($radioDevice);
+$control->turnOnOff();
+$control->volumeUp();
+$control->turnOnOff(false);
+
+$tvDevice = new TV();
+$tvControl = new AdvancedControl($tvDevice);
+$tvControl->turnOnOff();
+$tvControl->volumeUp();
+$tvControl->mute();
+$tvControl->turnOnOff(false);
