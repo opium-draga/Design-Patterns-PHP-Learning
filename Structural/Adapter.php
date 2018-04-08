@@ -12,7 +12,6 @@ class Message
     }
 }
 
-
 /**
  * Class Http
  * Adaptee
